@@ -1,10 +1,6 @@
--- Drop tables if they already exist
-DROP TABLE IF EXISTS transactions;
-DROP TABLE IF EXISTS books;
-DROP TABLE IF EXISTS users;
 
 -- Create users table
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -13,7 +9,7 @@ CREATE TABLE users (
 );
 
 -- Create books table
-CREATE TABLE books (
+CREATE TABLE IF NOT EXISTS books (
     id SERIAL PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     author VARCHAR(100) NOT NULL,
@@ -23,7 +19,7 @@ CREATE TABLE books (
 );
 
 -- Create transactions table
-CREATE TABLE transactions (
+CREATE TABLE IF NOT EXISTS transactions (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     book_id INT NOT NULL REFERENCES books(id) ON DELETE CASCADE,
@@ -51,7 +47,6 @@ INSERT INTO books (title, author, genre, publication_year, available) VALUES
 ('To Kill a Mockingbird', 'Harper Lee', 'Fiction', 1960, TRUE),
 ('1984', 'George Orwell', 'Dystopian', 1949, TRUE),
 ('The Catcher in the Rye', 'J.D. Salinger', 'Fiction', 1951, TRUE),
-('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', 'Fantasy', 1997, TRUE),
 ('The Lord of the Rings', 'J.R.R. Tolkien', 'Fantasy', 1954, TRUE),
 ('The Lean Startup', 'Eric Ries', 'Business', 2011, TRUE);
 
@@ -63,3 +58,13 @@ INSERT INTO transactions (user_id, book_id, issued_at, due_date, returned_at, fi
 (3, 3, '2024-11-10', '2024-11-25', NULL, NULL),
 (1, 4, '2024-11-15', '2024-11-30', NULL, NULL),
 (4, 5, '2024-11-20', '2024-12-05', NULL, NULL);
+
+-- Change owner of users table
+ALTER TABLE users OWNER TO library_user;
+
+-- Change owner of books table
+ALTER TABLE books OWNER TO library_user;
+
+-- Change owner of transactions table
+ALTER TABLE transactions OWNER TO library_user;
+

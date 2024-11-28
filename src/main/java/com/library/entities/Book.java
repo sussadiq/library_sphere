@@ -1,7 +1,6 @@
 package com.library.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "books")
@@ -62,5 +61,17 @@ public class Book {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", publicationYear=" + publicationYear +
+                ", available=" + available +
+                '}';
     }
 }

@@ -76,4 +76,17 @@ public class Transaction {
     public void setFine(Double fine) {
         this.fine = fine;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", user=" + user.getName() +
+                ", book=" + book.getTitle() +
+                ", issuedAt=" + issuedAt +
+                ", dueDate=" + dueDate +
+                ", returnedAt=" + returnedAt +
+                ", fine=" + fine +
+                '}';
+    }
 }

@@ -24,8 +24,6 @@ public class LibraryCLI {
 
     @Autowired
     private TransactionService transactionService;
-
-    // User Commands
     @ShellMethod(value = "Add a user", key = "add-user")
     public String addUser(String name, String email, String role) {
         User user = new User();

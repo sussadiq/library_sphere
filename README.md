@@ -72,8 +72,9 @@ Ensure the following are installed on your system:
 [git clone https://github.com/your-username/library-sphere.git](https://github.com/jamaluddin57/library-management-system.git)
 cd library-management-system
 ```
-### Set Up PostgreSQL
+#### ***For Linux/Ubuntu***:
 
+### Set Up PostgreSQL
 
 1. Log in as the `postgres` user:
    ```bash
@@ -86,6 +87,12 @@ cd library-management-system
    CREATE DATABASE library_db;
    CREATE USER library_user WITH PASSWORD 'postgres';
    GRANT ALL PRIVILEGES ON DATABASE library_db TO library_user;
+   \c library_db
+   ```
+   ```sql
+   GRANT USAGE ON SCHEMA public TO library_user;
+   GRANT CREATE ON SCHEMA public TO library_user;
+   ALTER SCHEMA public OWNER TO library_user;
    ```
 
 
@@ -93,16 +100,65 @@ cd library-management-system
    ```sql
    \q
    ```
-
-
 ---
 
 
 ### Run the SQL Script
-
+For Linux:
 ```bash
-psql -U library_user -d library_db -f src/main/resources/library_db.sql
+sudo -u postgres
 ```
+Then:
+```bash
+\c library_db
+ \i src/main/resources/library_db.sql
+ \q
+```
+---
+### ***For Windows***
+
+
+#### **1. Open pgAdmin**
+1. Open **pgAdmin** from the Start Menu or search bar.
+2. Log in to the pgAdmin interface using your PostgreSQL credentials (default username: `postgres`).
+
+
+#### **2. Create the Database and User**
+1. In the left-hand navigation tree, right-click on the "Databases" node and select **Create > Database**:
+   - Name: `library_db`
+   - Owner: `postgres'.
+   - Click **Save**.
+
+
+2. Create a new user (role):
+   - Navigate to **"Login/Group Roles"** under the "Roles" node.
+   - Right-click and select **Create > Login/Group Role**.
+     - Name: `library_user`
+     - Go to the **Definition** tab, set the password to `postgres`.
+     - Go to the **Privileges** tab and grant appropriate privileges:
+       - Can Login: Yes
+       - Superuser: Yes
+     - Click **Save**.
+
+
+3. Grant the user access to the database:
+   - Open the **Query Tool** (right-click on the database `library_db` and select "Query Tool").
+   - Run the following commands:
+     ```sql
+     GRANT ALL PRIVILEGES ON DATABASE library_db TO library_user;
+     ```
+---
+
+
+### **Run the SQL Script**
+
+1. Navigate to the database `library_db` in the left-hand tree.
+2. Right-click on the database and select **Query Tool**.
+3. Load the SQL script:
+   - Click the **folder icon** in the query tool or press **Ctrl+O** to browse to `src/main/resources/library_db.sql`.
+4. Run the script:
+   - After loading the file, click **Execute/Play** or press **F5**.
+
 ---
 
 ### Build the Project

@@ -1,0 +1,53 @@
+# Maven build directories
+/target/
+/out/
+
+# Maven dependencies
+.mvn/
+!mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+/logs/
+/*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# IDE-specific files
+/.idea/
+/*.iml
+/.vscode/
+/*.class
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+*.bak
+
+# Environment-specific configuration
+.env
+application.properties
+
+# Generated files
+*.war
+*.jar
+
+*.db
+
+# Coverage reports
+/coverage/
+/jacoco.exec
+
+# Testing reports
+/test-output/
+/surefire-reports/
+
+# Debugging files
+hs_err_pid*
+
+# Node.js dependencies (if applicable)
+/node_modules/

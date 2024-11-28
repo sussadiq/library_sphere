@@ -69,8 +69,8 @@ Ensure the following are installed on your system:
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your-username/library-sphere.git
-cd library-sphere
+[git clone https://github.com/your-username/library-sphere.git](https://github.com/jamaluddin57/library-management-system.git)
+cd library-management-system
 ```
 ### Set Up PostgreSQL
 
